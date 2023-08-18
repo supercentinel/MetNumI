@@ -1,3 +1,5 @@
+using DataFrames
+
 function diferentSigns(a::Float64, b::Float64)
     if a*b < 0
         return true
@@ -6,11 +8,13 @@ function diferentSigns(a::Float64, b::Float64)
     end
 end
 
-function biseccion(f::Function, a::Float64, b::Float64, err::Float64, maxIter::Int64)::Float64
+function biseccion(f::Function, a::Float64, b::Float64, err::Float64, maxIter::Int64)::DataFrame
     fa = f(a)
     fb = f(b)
 
     iters::Int64 = 0;
+
+    results = DataFrame(a = Float64[], b = Float64[], fa = Float64[], fb = Float64[], p = Float64[], fp = Float64[])
 
     #checks if f(a) and f(b) have different signs
     if !diferentSigns(fa, fb)
@@ -19,6 +23,8 @@ function biseccion(f::Function, a::Float64, b::Float64, err::Float64, maxIter::I
 
     p = (a + b)/2
     fp = f(p)
+
+    push!(results, [a, b, fa, fb, p, fp])
 
     while abs(fp) > err
         iters += 1
@@ -31,19 +37,12 @@ function biseccion(f::Function, a::Float64, b::Float64, err::Float64, maxIter::I
         p = (a + b)/2
         fp = f(p)
 
+        push!(results, [a, b, fa, fb, p, fp])
+
         if iters >= maxIter
             break
         end
     end
 
-    println("Iterations: ", iters)
-    println("Error: ", fp)
-    return p
+    return results
 end
-
-function f(x::Float64)::Float64
-    return x^2 - 2
-end
-
-println(biseccion(f, -2.0, -1.0, 0.0005, 32))
-
