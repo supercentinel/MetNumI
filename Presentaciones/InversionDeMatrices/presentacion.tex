@@ -1,0 +1,40 @@
+\documentclass{beamer}
+\usetheme{Warsaw}
+
+\title{Inversión de matrices}
+\subtitle{Para la solución de sistemas de ecuaciones lineales}
+\author{Alan Cerón Chávez}
+
+\institute{FES Acatlán - UNAM}
+\date{\today}
+
+
+\begin{document}
+    \begin{frame}
+        \titlepage
+    \end{frame}
+    \begin{frame}
+        \frametitle{Contenido}
+        \tableofcontents
+    \end{frame}
+    \section{Introducción}
+    \begin{frame}
+        \frametitle{Para qué necesitamos invertir matrices}
+        Podemos representar a un sistema de ecuaciones lineales como:
+        $$
+        Ax = b
+        $$
+    \end{frame}
+    \section{Desarrollo}
+    \begin{frame}
+        \frametitle{Desarrollo}
+        Sea $A$ una matriz y su determinante es distinta de cero, entonces:
+        $$
+        A^{-1} = \frac{1}{det(A)}adj(A)
+        $$
+        $$
+        A^{-1} = \frac{1}{det(A)}C^{T}
+        $$
+
+    \end{frame}
+\end{document}
