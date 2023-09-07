@@ -35,6 +35,8 @@ function biseccion(f::Function, a::Float64, b::Float64, err::Float64, maxIter::I
         end
 
         p = (a + b)/2
+        fa = f(a)
+        fb = f(b)
         fp = f(p)
 
         push!(results, [a, b, fa, fb, p, fp])
