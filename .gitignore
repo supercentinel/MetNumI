@@ -1,0 +1,10 @@
+# files for LaTeX
+*.aux
+*.fdb_latexmk
+*.fls
+*.nav
+*.out
+*.pdf
+*.toc
+*.synctex.gz
+
