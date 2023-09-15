@@ -143,8 +143,31 @@ impl Matrix {
         return cofactor;
     }
 
-//     fn inv(&self) -> Matrix {
-//     }
+    fn cofactor_matrix(&self) -> Matrix {
+        let mut cofactor_matrix = Matrix::new(self.rows, self.cols);
+
+        for i in 0..self.rows {
+            for j in 0..self.cols {
+                cofactor_matrix.data[i][j] = self.cofactor(i+1, j+1);
+            }
+        }
+
+        return cofactor_matrix;
+    }
+
+    fn inv(&self) -> Matrix {
+        let mut inv = Matrix::new(self.rows, self.cols);
+
+        let det = self.det();
+
+        if det == 0.0 {
+            panic!("The Matrix is not invertible");
+        }
+
+        inv = self.cofactor_matrix().transpose().scalar_mul(&(1.0/det));
+
+        return inv;
+    }
 }
 
 fn main() {
@@ -184,4 +207,9 @@ fn main() {
     a.minor(2, 4).print();
     println!("C_1,1 of A");
     println!("{}", a.cofactor(2, 4));
+    println!("Cofactor Matrix of A");
+    a.cofactor_matrix().print();
+    println!("Inverse of A");
+    a.inv().print();
+    println!("A * A^-1 = I");
 }
