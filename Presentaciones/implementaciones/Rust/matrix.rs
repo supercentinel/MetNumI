@@ -93,7 +93,7 @@ impl Matrix {
                     continue;
                 }
 
-                // Horrible nesting
+                // Horrible nesting. written by Copilot
                 if i < _i-1 && j < _j-1 {
                     minor_matrix.data[i][j] = self.data[i][j];
                 } else {
