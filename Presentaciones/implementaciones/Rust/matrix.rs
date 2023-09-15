@@ -116,42 +116,72 @@ impl Matrix {
             det = self.data[0][0] * self.data[1][1] - self.data[0][1] * self.data[1][0];
         }
 
+        if self.rows == 3 {
+            det = (self.data[0][0] * self.minor(1, 1).det())
+                - (self.data[0][1] * self.minor(1, 2).det())
+                + (self.data[0][2] * self.minor(1, 3).det());
+        }
+
         if self.rows > 3 {
-            det = 0.0;
+            for i in 0..self.cols {
+                det += self.data[0][i] * self.cofactor(1, i+1);
+            }
         }
 
         return det;
     }
 
-//     fn transpose(&self) -> Matrix {
-//     }
+    fn cofactor(&self, _i: usize, _j: usize) -> f64 {
+        let mut cofactor = 0.0;
+
+        if (_i + _j) % 2 == 0 {
+            cofactor = self.minor(_i, _j).det();
+        } else {
+            cofactor = -self.minor(_i, _j).det();
+        }
+
+        return cofactor;
+    }
 
 //     fn inv(&self) -> Matrix {
 //     }
 }
 
 fn main() {
-    let mut a = Matrix::new(3, 3);
+    let mut a = Matrix::new(4, 4);
     let mut b = Matrix::new(2, 2);
 
     a.data[0][0] = 1.0;
-    a.data[0][1] = 2.0;
-    a.data[0][2] = 3.0;
-    a.data[1][0] = 4.0;
-    a.data[1][1] = 5.0;
-    a.data[1][2] = 6.0;
-    a.data[2][0] = 8.0;
-    a.data[2][1] = 10.0;
-    a.data[2][2] = 10.0;
-
+    a.data[0][1] = -3.0;
+    a.data[0][2] = 5.0;
+    a.data[0][3] = 6.0;
+    a.data[1][0] = 2.0;
+    a.data[1][1] = 4.0;
+    a.data[1][2] = 0.0;
+    a.data[1][3] = 3.0;
+    a.data[2][0] = 1.0;
+    a.data[2][1] = 5.0;
+    a.data[2][2] = 9.0;
+    a.data[2][3] = -2.0;
+    a.data[3][0] = 4.0;
+    a.data[3][1] = 0.0;
+    a.data[3][2] = 2.0;
+    a.data[3][3] = 7.0;
 
     b.data[0][0] = 20.0;
     b.data[0][1] = 50.0;
     b.data[1][0] = 15.0;
     b.data[1][1] = 90.0;
 
+    print!("Matrix B:");
+    println!(" {} ", a.minor(3, 2).det());
+
     println!("Matrix A:");
     a.print();
-    println!("M_1,1 of A");
-    a.minor(2, 2).print();
+    println!("Det(A): ");
+    println!("{}", a.det());
+    println!("M_3,2 of A");
+    a.minor(2, 4).print();
+    println!("C_1,1 of A");
+    println!("{}", a.cofactor(2, 4));
 }
