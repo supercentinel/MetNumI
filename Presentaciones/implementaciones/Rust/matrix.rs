@@ -70,10 +70,35 @@ impl Matrix {
         let mut minor_matrix = Matrix::new(self.cols - 1, self.rows - 1);
 
         for i in 0..self.rows {
+            if i == _i-1 {
+                continue;
+            }
+
             for j in 0..self.cols {
-                if
+                if j == _j-1 {
+                    continue;
+                }
+
+                // Horrible nesting
+                if i < _i-1 && j < _j-1 {
+                    minor_matrix.data[i][j] = self.data[i][j];
+                } else {
+                    if i < _i-1 && j > _j-1 {
+                        minor_matrix.data[i][j-1] = self.data[i][j];
+                    } else {
+                        if i > _i-1 && j < _j-1 {
+                            minor_matrix.data[i-1][j] = self.data[i][j];
+                        } else {
+                            if i > _i-1 && j > _j-1 {
+                                minor_matrix.data[i-1][j-1] = self.data[i][j];
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        return minor_matrix;
     }
 
     fn det(&self) -> f64 {
@@ -106,13 +131,18 @@ impl Matrix {
 }
 
 fn main() {
-    let mut a = Matrix::new(2, 2);
+    let mut a = Matrix::new(3, 3);
     let mut b = Matrix::new(2, 2);
 
     a.data[0][0] = 1.0;
-    a.data[0][1] = 5.0;
-    a.data[1][0] = 13.0;
-    a.data[1][1] = 16.0;
+    a.data[0][1] = 2.0;
+    a.data[0][2] = 3.0;
+    a.data[1][0] = 4.0;
+    a.data[1][1] = 5.0;
+    a.data[1][2] = 6.0;
+    a.data[2][0] = 8.0;
+    a.data[2][1] = 10.0;
+    a.data[2][2] = 10.0;
 
 
     b.data[0][0] = 20.0;
@@ -122,7 +152,6 @@ fn main() {
 
     println!("Matrix A:");
     a.print();
-    println!("Matrix A^t:");
-    a.transpose().print();
-    println!("|A| = {}", a.det());
+    println!("M_1,1 of A");
+    a.minor(2, 2).print();
 }
