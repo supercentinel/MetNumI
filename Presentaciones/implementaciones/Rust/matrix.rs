@@ -22,7 +22,7 @@ impl Matrix {
         }
     }
 
-    fn scalar_mul(&self, scalar: &f64) -> Matrix {
+    fn scalar_prod(&self, scalar: &f64) -> Matrix {
         let mut result = Matrix::new(self.rows, self.cols);
 
         for i in 0..self.rows {
@@ -48,6 +48,20 @@ impl Matrix {
         }
 
         return sum;
+    }
+
+    fn prod(&self, other: &Matrix) -> Matrix {
+        let mut prod = Matrix::new(self.rows, other.cols);
+
+        for i in 0..self.rows {
+            for j in 0..other.cols {
+                for k in 0..self.cols {
+                    prod.data[i][j] += self.data[i][k] * other.data[k][j];
+                }
+            }
+        }
+
+        return prod;
     }
 
     fn transpose(&self) -> Matrix {
@@ -164,7 +178,7 @@ impl Matrix {
             panic!("The Matrix is not invertible");
         }
 
-        inv = self.cofactor_matrix().transpose().scalar_mul(&(1.0/det));
+        inv = self.cofactor_matrix().transpose().scalar_prod(&(1.0/det));
 
         return inv;
     }
@@ -212,4 +226,5 @@ fn main() {
     println!("Inverse of A");
     a.inv().print();
     println!("A * A^-1 = I");
+    a.prod(&a.inv()).print();
 }
