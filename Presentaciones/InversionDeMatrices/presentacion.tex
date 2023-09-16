@@ -1,4 +1,5 @@
 \documentclass{beamer}
+\usepackage{amsmath}
 \usetheme{Warsaw}
 
 \title{Inversión de matrices}
@@ -29,28 +30,100 @@
 
     \begin{frame}
         \frametitle{¿Qué es una matriz?}
-        Una matriz es un arreglo rectangular de números.
+        Una matriz $A$ es un arreglo rectangular de números de mn elementos, ordenados en m filas y n columnas.
         $$
-            \begin{bmatrix}
+        A=
+            \begin{pmatrix}
                 a_{11} & a_{12} & \cdots & a_{1n} \\
                 a_{21} & a_{22} & \cdots & a_{2n} \\
                 \vdots & \vdots & \ddots & \vdots \\
                 a_{1m} & a_{2m} & \cdots & a_{nm} \\
-            \end{bmatrix}
+            \end{pmatrix}
         $$
     \end{frame}
 
 
     \subsection{¿Cómo se relaciona con un sistema de ecuaciones lineales?}
     \begin{frame}
-        \frametitle{Para qué necesitamos invertir matrices}
-        Podemos representar a un sistema de ecuaciones lineales como:
+        \frametitle{Representación de un sistema de ecuaciones lineales como una matriz}
+        sea el siguiente sistema de ecuaciones lineales:
         $$
-        Ax = b
+        \begin{cases}
+            2x + 3y = 8 \\
+            3x + 4y = 9
+        \end{cases}
+        $$
+        Los coeficientes de las variables se representan como una matriz:
+        $$
+        \begin{pmatrix}
+            2 & 3 \\
+            3 & 4
+        \end{pmatrix}
+        $$
+        Y el sistema de ecuaciones lineales se puede representar de la manera $Ax=b$
+        $$
+        \begin{pmatrix}
+            2 & 3 \\
+            3 & 4
+        \end{pmatrix}
+        \begin{pmatrix}
+            x \\
+            y
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            8 \\
+            9
+        \end{pmatrix}
+        $$
+
+    \end{frame}
+    \subsection{Resolviendo el sistema de ecuaciones lineales}
+
+    \begin{frame}
+        Con la representación $Ax=b$ podemos resolver el sistema de ecuaciones lineales de la siguiente manera:
+        \begin{align*}
+            Ax &= b \\
+            A^{-1}Ax &= A^{-1}b \\
+            Ix &= A^{-1}b \\
+            x &= A^{-1}b
+        \end{align*}
+    \end{frame}
+
+
+    \section{Desarrollo}
+    \subsection{¿Por qué?}
+
+    \begin{frame}
+        La matriz identidad $I$ es una matriz cuadrada que tiene unos en su diagonal principal y ceros en el resto de sus elementos.
+        Tiene la propiedad de que al multiplicar cualquier matriz $A$ por $I$ el resultado es la misma matriz $A$.
+        $$
+        I =
+        \begin{pmatrix}
+            1 & 0 & \cdots & 0 \\
+            0 & 1 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 1 \\
+        \end{pmatrix}
+        $$
+
+    \end{frame}
+
+
+    \subsection{La inversa de una matriz}
+
+    \begin{frame}
+        \frametitle{Inversa de una matriz}
+        El producto de una matriz $A$ por su inversa $A^{-1}$ es la matriz identidad $I$.
+        Sea $A$ una matriz y su determinante es distinta de cero, entonces:
+        $$
+        A^{-1} = \frac{1}{det(A)}adj(A)
+        $$
+        $$
+        A^{-1} = \frac{1}{det(A)}C^{T}
         $$
     \end{frame}
-    \section{Desarrollo}
-    \subsection{La inversa de una matriz}
+
     \subsection{El detrminante de una matriz}
     \subsection{La matriz menor}
     \subsection{Co-factores}
@@ -60,16 +133,27 @@
     \section{Ejercicios}
     \section{implementación}
     \section{Conclusiones}
+    \subsection{Complejidad computacional}
 
     \begin{frame}
-        \frametitle{Desarrollo}
-        Sea $A$ una matriz y su determinante es distinta de cero, entonces:
-        $$
-        A^{-1} = \frac{1}{det(A)}adj(A)
-        $$
-        $$
-        A^{-1} = \frac{1}{det(A)}C^{T}
-        $$
-
+        \frametitle{Complejidad computacional}
+        \begin{itemize}
+            \item El calculo de la inversa de una matriz es un proceso que requiere de mucho tiempo de cómputo.\\
+            \item La complejidad computacional de este proceso es de $O(n^3)$\\
+            \item Por lo que es necesario implementar algoritmos que nos permitan obtener la inversa de una matriz de manera eficiente.\\
+        \end{itemize}
     \end{frame}
+
+    \subsection{Conclusiones}
+    \begin{frame}
+        \frametitle{Conclusiones}
+        \begin{itemize}
+            \item El calculo de la inversa de una matriz nos permite resolver sistemas de ecuaciones lineales.\\
+            \item Su obtención es un proceso tedioso y que requiere de mucho tiempo de cómputo.\\
+            \item Por lo que es necesario implementar algoritmos que nos permitan obtener la inversa de una matriz de manera eficiente.\\
+            \item Aunque existen metodos para resolver sistemas de ecuaciones lineales que no requieren de la inversa de una matriz.\\
+            \item En las proximas presentaciones se verán algunos de estos métodos.
+        \end{itemize}
+    \end{frame}
+
 \end{document}
