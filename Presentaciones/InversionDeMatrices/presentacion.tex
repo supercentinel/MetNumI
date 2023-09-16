@@ -13,11 +13,35 @@
     \begin{frame}
         \titlepage
     \end{frame}
+
     \begin{frame}
         \frametitle{Contenido}
-        \tableofcontents
+        \tableofcontents[sections=1-2]
     \end{frame}
+
+    \begin{frame}
+        \frametitle{Contenido}
+        \tableofcontents[sections=3-5]
+    \end{frame}
+
     \section{Introducción}
+    \subsection{¿Qué es una matriz?}
+
+    \begin{frame}
+        \frametitle{¿Qué es una matriz?}
+        Una matriz es un arreglo rectangular de números.
+        $$
+            \begin{bmatrix}
+                a_{11} & a_{12} & \cdots & a_{1n} \\
+                a_{21} & a_{22} & \cdots & a_{2n} \\
+                \vdots & \vdots & \ddots & \vdots \\
+                a_{1m} & a_{2m} & \cdots & a_{nm} \\
+            \end{bmatrix}
+        $$
+    \end{frame}
+
+
+    \subsection{¿Cómo se relaciona con un sistema de ecuaciones lineales?}
     \begin{frame}
         \frametitle{Para qué necesitamos invertir matrices}
         Podemos representar a un sistema de ecuaciones lineales como:
@@ -26,6 +50,17 @@
         $$
     \end{frame}
     \section{Desarrollo}
+    \subsection{La inversa de una matriz}
+    \subsection{El detrminante de una matriz}
+    \subsection{La matriz menor}
+    \subsection{Co-factores}
+    \subsection{Determinante para matrices n > 3}
+    \subsection{Matriz de cofactores ó adjunta}
+    \subsection{Inversión de matrices}
+    \section{Ejercicios}
+    \section{implementación}
+    \section{Conclusiones}
+
     \begin{frame}
         \frametitle{Desarrollo}
         Sea $A$ una matriz y su determinante es distinta de cero, entonces:
