@@ -1,6 +1,9 @@
 \documentclass{beamer}
+\usepackage{graphicx}
 \usepackage{amsmath}
 \usetheme{Warsaw}
+
+\graphicspath{ {./images/} }
 
 \title{Inversión de matrices}
 \subtitle{Para la solución de sistemas de ecuaciones lineales}
@@ -125,13 +128,224 @@
     \end{frame}
 
     \subsection{El detrminante de una matriz}
-    \subsection{La matriz menor}
+
+    \begin{frame}
+        \frametitle{Caso 1: Matriz de 1x1}
+        Sea $A$ una matriz de 1x1, entonces su determinante es el elemento de la matriz.
+        $$
+        A =
+        \begin{pmatrix}
+            a_{11}
+        \end{pmatrix}
+        \quad \det{A} = a_{11}
+        $$
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Caso 2: Matriz de 2x2}
+        Sea $A$ una matriz de 2x2, entonces su determinante es:
+        $$
+        A =
+        \begin{pmatrix}
+            a_{11} & a_{12} \\
+            a_{21} & a_{22}
+        \end{pmatrix}
+        \quad \det{A} = a_{11}a_{22} - a_{12}a_{21}
+        $$
+    \end{frame}
+
+    \begin{frame}
+        Sea $A$ una matriz de 3x3, entonces su determinante es:
+        $$
+        A =
+        \begin{pmatrix}
+            a_{11} & a_{12} & a_{13} \\
+            a_{21} & a_{22} & a_{23} \\
+            a_{31} & a_{32} & a_{33}
+        \end{pmatrix}
+        \quad \det{A} =
+        \begin{align*}
+            a_{11}(a_{22}a_{33} &- a_{23}a_{32}) \\
+            &- \\
+            a_{12}(a_{21}a_{33} &- a_{23}a_{31}) \\
+            &+ \\
+            a_{13}(a_{21}a_{32} &- a_{22}a_{31})
+        \end{align*}
+        $$
+        O de la siguiente manera:
+        $$
+        \det{A} = a_{11}\begin{vmatrix}a_{22} & a_{23}\\ a_{32} & a_{33}\end{vmatrix} - a_{12}\begin{vmatrix}a_{21} & a_{23}\\ a_{31} & a_{33}\end{vmatrix} + a_{13}\begin{vmatrix}a_{21} & a_{22}\\ a_{31} & a_{32}\end{vmatrix}
+        $$
+    \end{frame}
+
+        \begin{frame}
+            \frametitle{Caso n: Matriz de nxn}
+            Sea $A$ una matriz de nxn, entonces su determinante es:
+            $$
+            \det{A} = \sum_{i=1}^{n} a_{11}A_{11} + a_{12}A_{12} + \cdots + a_{1n}A_{1n}
+            $$
+        \end{frame}
+
     \subsection{Co-factores}
-    \subsection{Determinante para matrices n > 3}
-    \subsection{Matriz de cofactores ó adjunta}
+
+    \begin{frame}
+        \begin{center}
+            Qué m**** es A{ij}?
+        \end{center}\\
+        A{ij} es llamado el cofactor de la matriz A en $ij$, y se define como:
+        $$
+        A_{ij} = (-1)^{i+j}\det{M_{ij}}
+        $$
+
+        Donde $M_{ij}$ es la matriz menor de $A$ en $ij$.\\
+        Nota: $(-1)^{i+j}$ es el signo del cofactor. Y puede ser expresado como:
+        $$
+        (-1)^{i+j} =
+        \begin{cases}
+            1 & \text{si } i+j \text{ es par}\\
+            -1 & \text{si } i+j \text{ es impar}
+        \end{cases}
+        $$
+    \end{frame}
+
+    \subsection{La matriz menor}
+
+    \begin{frame}
+        \frametitle{Qué es Mij?}
+        Sea $A$ una matriz de nxn, entonces su matriz menor $M_{ij}$ de dimensiones (n-1)x(n-1) es la matriz resultante de eliminar la fila $i$ y la columna $j$ de la matriz $A$.\\
+        Ejemplo:
+        $$
+        A =
+        \begin{pmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6 \\
+            7 & 8 & 9
+        \end{pmatrix}
+        \quad M_{12} =
+        \begin{pmatrix}
+            4 & 6 \\
+            7 & 9
+        \end{pmatrix}
+        $$
+    \end{frame}
+
+    \subsection{Matriz de cofactores}
+
+    \begin{frame}
+        \frametitle{Matriz de cofactores}
+        Con todo lo anterior podemos definir la matriz de cofactores y la adjunta de una matriz.\\
+        Comenzando con la matriz de cofactores:\\
+        La Matriz de cofactores $C$ de una matriz $A$ es la matriz que contiene los cofactores de $A$.
+        $$
+        C = \begin{pmatrix}
+            A_{11} & A_{12} & \cdots & A_{1n} \\
+            A_{21} & A_{22} & \cdots & A_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            A_{n1} & A_{n2} & \cdots & A_{nn}
+        \end{pmatrix}
+        $$
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Matriz adjunta}
+        La matriz adjunta es la matriz de cofactores transpuesta.
+        $$
+        adj(A) = C^T
+        $$
+    \end{frame}
+
     \subsection{Inversión de matrices}
+
+    \begin{frame}
+        \frametitle{Inversión de matrices}
+        Finalmente, podemos definir la inversa de una matriz.\\
+        Regresamos a la definición del inicio:
+        $$
+        A^{-1} = \frac{1}{\det{A}}adj(A)
+        $$
+        Y Si tenemos una matriz de $4x4$? Cuantas operaciones tenemos que hacer?\\
+        \begin{center}
+            ¿Para $n x n$?
+        \end{center}
+    \end{frame}
     \section{Ejercicios}
+    \subsection{Ejercicio 1}
+
+    \begin{frame}
+        \frametitle{Matriz de 4x4}
+        Sea la matriz $A$ de 4x4:
+        $$
+        A =
+        %nmms copilot haz algo más complejo
+        % \begin{pmatrix}
+        %     1 & 2 & 3 & 4 \\
+        %     5 & 6 & 7 & 8 \\
+        %     9 & 10 & 11 & 12 \\
+        %     13 & 14 & 15 & 16
+        % \end{pmatrix}
+        \begin{pmatrix}
+            25 & 36 & 57 & -12 \\
+            54 & 23 & 12 & 45 \\
+            12 & 45 & 78 & 96 \\
+            45 & 78 & 96 & 12
+        \end{pmatrix}
+        $$
+        Calcular la inversa de $A$.\\
+        $$
+        A^{-1} = \frac{1}{\det{A}}adj(A)
+        $$
+    \end{frame}
+
+    \subsection{Ejercicio 2}
+
+    \begin{frame}
+        \frametitle{Matriz de 8x8}
+        Sea la matriz $A$ de 8x8:
+        $$
+        A =
+        %Matriz de 8x8 con determinante diferente de 0
+        \begin{pmatrix}
+              3 & 2 & 1 & 4 & 0 & 5 & 6 & 7 \\
+              0 & 8 & 9 & 0 & 1 & 0 & 2 & 0 \\
+              7 & 0 & 3 & 0 & 6 & 2 & 0 & 8 \\
+              4 & 0 & 5 & 9 & 0 & 1 & 0 & 0 \\
+              0 & 6 & 0 & 0 & 7 & 0 & 9 & 0 \\
+              1 & 0 & 0 & 0 & 8 & 4 & 0 & 3 \\
+              0 & 0 & 4 & 5 & 2 & 0 & 7 & 1 \\
+              2 & 0 & 0 & 3 & 0 & 9 & 8 & 6 \\
+        \end{pmatrix}
+        $$
+        Calcular la inversa de $A$.\\
+        $$
+        A^{-1} = \frac{1}{\det{A}}adj(A)
+        $$
+    \end{frame}
+    \subsection{Ejercicio 3}
+        \begin{frame}
+            \frametitle{Resolver el sistema de ecuaciones}
+            Sea el sistema de ecuaciones:
+            $$
+            \begin{cases}
+                12x + 3y - 4z = 17 \\
+                -3x + 24y + 45z = -6 \\
+                x + 9y - 6z = -13
+            \end{cases}
+            $$
+            Resolver el sistema de ecuaciones utilizando la matriz inversa.
+            $$
+                A^{-1} = \frac{1}{\det{A}}adj(A)\qquad x = A^{-1}b
+            $$
+        \end{frame}
+
     \section{implementación}
+    \subsection{QR al código}
+    \begin{frame}
+        \frametitle{Implementación en Rust}
+        \begin{center}
+            \includegraphics[width=170pt]{images/QR_rust_implementation.png}
+        \end{center}
+    \end{frame}
+    \subsection{Live en Repl.it}
     \section{Conclusiones}
     \subsection{Complejidad computacional}
 
