@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use std::fs;
 
 #[derive(Debug)]
@@ -211,52 +212,4 @@ impl Matrix {
 
         return inv;
     }
-}
-
-fn main() {
-    let mut a = Matrix::new(4, 4);
-    let mut b = Matrix::new(2, 2);
-
-    a.data[0][0] = 1.0;
-    a.data[0][1] = -3.0;
-    a.data[0][2] = 5.0;
-    a.data[0][3] = 6.0;
-    a.data[1][0] = 2.0;
-    a.data[1][1] = 4.0;
-    a.data[1][2] = 0.0;
-    a.data[1][3] = 3.0;
-    a.data[2][0] = 1.0;
-    a.data[2][1] = 5.0;
-    a.data[2][2] = 9.0;
-    a.data[2][3] = -2.0;
-    a.data[3][0] = 4.0;
-    a.data[3][1] = 0.0;
-    a.data[3][2] = 2.0;
-    a.data[3][3] = 7.0;
-
-    b.data[0][0] = 20.0;
-    b.data[0][1] = 50.0;
-    b.data[1][0] = 15.0;
-    b.data[1][1] = 90.0;
-
-    print!("Matrix B:");
-    println!(" {} ", a.minor(3, 2).det());
-
-    println!("Matrix A:");
-    a.print();
-    println!("Det(A): ");
-    println!("{}", a.det());
-    println!("M_3,2 of A");
-    a.minor(2, 4).print();
-    println!("C_1,1 of A");
-    println!("{}", a.cofactor(2, 4));
-    println!("Cofactor Matrix of A");
-    a.cofactor_matrix().print();
-    println!("Inverse of A");
-    a.inv().print();
-    println!("A * A^-1 = I");
-    a.prod(&a.inv()).print();
-    println!("Martix readed from file");
-    let c = Matrix::read_from_file("./matrix.txt");
-    c.print();
 }
