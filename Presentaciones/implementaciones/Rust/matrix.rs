@@ -27,7 +27,7 @@ impl Matrix {
 
     //Stolen form https://github.com/robertfeliciano/linear-rustgebra/blob/main/src/lib.rs
     pub fn read_from_file(path: &str) -> Matrix {
-        let content: String = fs::read_to_string(path).unwrap_or_else(|e| panic!("{e}"));
+        let content: String = fs::read_to_string(path).unwrap_or_else(|_e| panic!("{}", "{e}"));
         let mut matrix: Vec<Vec<f64>> = Vec::new();
 
         for rows in content.lines() {
@@ -175,7 +175,7 @@ impl Matrix {
     }
 
     pub fn cofactor(&self, _i: usize, _j: usize) -> f64 {
-        let mut cofactor = 0.0;
+        let cofactor: f64;
 
         if (_i + _j) % 2 == 0 {
             cofactor = self.minor(_i, _j).det();
@@ -199,7 +199,7 @@ impl Matrix {
     }
 
     pub fn inv(&self) -> Matrix {
-        let mut inv = Matrix::new(self.rows, self.cols);
+        let inv: Matrix;
 
         let det = self.det();
 
@@ -257,6 +257,6 @@ fn main() {
     println!("A * A^-1 = I");
     a.prod(&a.inv()).print();
     println!("Martix readed from file");
-    let mut c = Matrix::read_from_file("./matrix.txt");
+    let c = Matrix::read_from_file("./matrix.txt");
     c.print();
 }
