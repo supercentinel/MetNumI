@@ -1,11 +1,11 @@
-struct Matrix {
+pub struct Matrix {
     pub data: Vec<Vec<f64>>,
     pub rows: usize,
     pub cols: usize,
 }
 
 impl Matrix {
-    fn new(rows: usize, cols: usize) -> Matrix {
+    pub fn new(rows: usize, cols: usize) -> Matrix {
         Matrix {
             data: vec![vec![0.0; cols]; rows],
             rows,
@@ -13,7 +13,7 @@ impl Matrix {
         }
     }
 
-    fn print(&self) {
+    pub fn print(&self) {
         for rows in &self.data {
             for cols in rows {
                 print!("{} ", cols);
@@ -22,7 +22,7 @@ impl Matrix {
         }
     }
 
-    fn scalar_prod(&self, scalar: &f64) -> Matrix {
+    pub fn scalar_prod(&self, scalar: &f64) -> Matrix {
         let mut result = Matrix::new(self.rows, self.cols);
 
         for i in 0..self.rows {
@@ -34,7 +34,7 @@ impl Matrix {
         return result;
     }
 
-    fn sum(&self, other: &Matrix) -> Matrix {
+    pub fn sum(&self, other: &Matrix) -> Matrix {
         if self.rows != other.rows || self.cols != other.rows {
             panic!("The Matrices need to be of the same dimensions");
         }
@@ -50,7 +50,7 @@ impl Matrix {
         return sum;
     }
 
-    fn prod(&self, other: &Matrix) -> Matrix {
+    pub fn prod(&self, other: &Matrix) -> Matrix {
         let mut prod = Matrix::new(self.rows, other.cols);
 
         for i in 0..self.rows {
@@ -64,7 +64,7 @@ impl Matrix {
         return prod;
     }
 
-    fn transpose(&self) -> Matrix {
+    pub fn transpose(&self) -> Matrix {
         let mut transpose = Matrix::new(self.cols, self.rows);
 
         for i in 0..self.rows {
@@ -76,7 +76,7 @@ impl Matrix {
         return transpose;
     }
 
-    fn minor(&self, _i: usize, _j: usize) -> Matrix {
+    pub fn minor(&self, _i: usize, _j: usize) -> Matrix {
         if self.cols == 1 || self.rows == 1 {
             panic!("The 1x1 matrix does not have minors");
         }
@@ -115,7 +115,7 @@ impl Matrix {
         return minor_matrix;
     }
 
-    fn det(&self) -> f64 {
+    pub fn det(&self) -> f64 {
         let mut det = 0.0;
 
         if self.rows != self.cols {
@@ -145,7 +145,7 @@ impl Matrix {
         return det;
     }
 
-    fn cofactor(&self, _i: usize, _j: usize) -> f64 {
+    pub fn cofactor(&self, _i: usize, _j: usize) -> f64 {
         let mut cofactor = 0.0;
 
         if (_i + _j) % 2 == 0 {
@@ -157,7 +157,7 @@ impl Matrix {
         return cofactor;
     }
 
-    fn cofactor_matrix(&self) -> Matrix {
+    pub fn cofactor_matrix(&self) -> Matrix {
         let mut cofactor_matrix = Matrix::new(self.rows, self.cols);
 
         for i in 0..self.rows {
@@ -169,7 +169,7 @@ impl Matrix {
         return cofactor_matrix;
     }
 
-    fn inv(&self) -> Matrix {
+    pub fn inv(&self) -> Matrix {
         let mut inv = Matrix::new(self.rows, self.cols);
 
         let det = self.det();
