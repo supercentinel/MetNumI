@@ -1,3 +1,6 @@
+use std::fs;
+
+#[derive(Debug)]
 pub struct Matrix {
     pub data: Vec<Vec<f64>>,
     pub rows: usize,
@@ -20,6 +23,32 @@ impl Matrix {
             }
             println!();
         }
+    }
+
+    //Stolen form https://github.com/robertfeliciano/linear-rustgebra/blob/main/src/lib.rs
+    pub fn read_from_file(path: &str) -> Matrix {
+        let content: String = fs::read_to_string(path).unwrap_or_else(|e| panic!("{e}"));
+        let mut matrix: Vec<Vec<f64>> = Vec::new();
+
+        for rows in content.lines() {
+            let mut row: Vec<f64> = Vec::new();
+            let entries: Vec<&str> = rows.split_whitespace().collect();
+
+            for entry in entries {
+                row.push(entry.parse::<f64>().unwrap());
+            }
+
+            matrix.push(row);
+        }
+
+        let rows = matrix.len();
+        let cols = matrix[0].len();
+
+        return Matrix {
+            data: matrix,
+            rows,
+            cols,
+        };
     }
 
     pub fn scalar_prod(&self, scalar: &f64) -> Matrix {
@@ -227,4 +256,7 @@ fn main() {
     a.inv().print();
     println!("A * A^-1 = I");
     a.prod(&a.inv()).print();
+    println!("Martix readed from file");
+    let mut c = Matrix::read_from_file("./matrix.txt");
+    c.print();
 }
