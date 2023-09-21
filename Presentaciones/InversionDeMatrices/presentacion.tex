@@ -1,5 +1,6 @@
 \documentclass{beamer}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \usepackage{amsmath}
 \usetheme{Warsaw}
 
@@ -346,14 +347,58 @@
         \end{center}
     \end{frame}
     \subsection{Live en Repl.it}
-    \section{Conclusiones}
-    \subsection{Complejidad computacional}
 
     \begin{frame}
-        \frametitle{Complejidad computacional}
+        \frametitle{Live en Repl.it}
+        \begin{center}
+            \includegraphics[width=170pt]{images/QR_replit.png}
+        \end{center}
+    \end{frame}
+
+    \section{Conclusiones}
+    \subsection{Complejidad computacional}
+    \subsubsection{¿Qué es la complejidad computacional?}
+
+    \begin{frame}
+        \frametitle{¿Qué es la complejidad computacional?}
+        La complejidad computacional de un algoritmo es la cantidad de tiempo que tarda en ejecutarse. Independientemente
+        de los recursos máquina en la que se ejecute.\\
+        En este caso nos referimos a la cantidad de operaciones que se necesitan para obtener la inversa de una matriz.\\
+        Si tenemos una matriz de $n x n$, cuántas operaciones tenemos que hacer?\\
+        Para esto tenemos la notación $O()$ que calcula la complejidad computacional de un algoritmo en el peor caso.\\
+    \end{frame}
+
+    \subsubsection{Calculando la complejidad computacional para el determinante}
+
+    \begin{frame}
+        \frametitle{Calculando la complejidad computacional para el determinante}
+        Debido a que el cálculo del determinante de una matriz es un proceso recursivo, podemos calcular su complejidad computacional de la siguiente manera:
+        $$
+        T(n) = T(n-1) + n
+        $$
+        Donde $n$ es el tamaño de la matriz.\\
+        Y $T(n)$ es la complejidad computacional de la matriz de tamaño $n$.\\
+        \begin{center}
+            ¿Cuál es la complejidad computacional de la matriz de $n x n$?
+        \end{center}
+        La complejidad computacional de la matriz de $n x n$ es $O(n!)$
+    \end{frame}
+
+    \subsubsection{Calculando la complejidad computacional para la matriz adjunta}
+
+    \begin{frame}
+        \frametitle{Calculando la complejidad computacional para la matriz adjunta}
+        De momento soy incapaz de explicar la complejidad computacional de la matriz adjunta.\\
+        Pero de igual manera es un proceso recursivo.\\
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Para concluir}
+        Si queremos calcular $O()$ para $A^{-1}$ tenemos la suma complejidad del determinante y la adjunta; ambas de $O(n!)$.\\
+        Y agregamos la complejidad del producto de una matriz por un escalar, que es de $O(n^2)$.\\
         \begin{itemize}
             \item El cálculo de la inversa de una matriz es un proceso que requiere de mucho tiempo de cómputo.\\
-            \item La complejidad computacional de este proceso es de $O(n^3)$\\
+            \item La complejidad computacional de este proceso es de $O(n!)$!!!\\
             \item Por lo que es necesario implementar algoritmos que nos permitan obtener la inversa de una matriz de manera eficiente.\\
         \end{itemize}
     \end{frame}
@@ -367,6 +412,22 @@
             \item Por lo que es necesario implementar algoritmos que nos permitan obtener la inversa de una matriz de manera eficiente.\\
             \item Aunque existen metodos para resolver sistemas de ecuaciones lineales que no requieren de la inversa de una matriz.\\
             \item En las próximas presentaciones se verán algunos de estos métodos.
+        \end{itemize}
+    \end{frame}
+    \subsection{Referencias}
+    \begin{frame}
+        Libros:
+        \begin{itemize}
+            \item Álgebra Lineal, Stanley I. Grossman, 6ta edición.
+        \end{itemize}
+        Páginas web:
+        \begin{itemize}
+            \item\url{https://learnxinyminutes.com/docs/asymptotic-notation}
+        \end{itemize}
+        IA :
+        \begin{itemize}
+            \item Copilot para autocompletar la presentación y unas partes de la implementación.
+            \item ChatGPT para Explicar la complejidad computacional.
         \end{itemize}
     \end{frame}
 
