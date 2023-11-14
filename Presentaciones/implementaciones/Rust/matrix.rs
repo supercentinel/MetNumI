@@ -106,6 +106,7 @@ impl Matrix {
         return transpose;
     }
 
+    //TODO Add check for square matrix
     pub fn minor(&self, _i: usize, _j: usize) -> Matrix {
         if self.cols == 1 || self.rows == 1 {
             panic!("The 1x1 matrix does not have minors");
@@ -151,7 +152,7 @@ impl Matrix {
         if self.rows != self.cols {
             panic!("The Matrix needs to be square");
         }
-
+        //TODO Refactor this to a switch statement
         if self.rows == 1 {
             det = self.data[0][0];
         }
